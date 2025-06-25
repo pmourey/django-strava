@@ -1,0 +1,43 @@
+{% extends "strava/base.html" %}
+
+{% block content %}
+    <h2>Activités Strava ({{ activity_filter }}): distance totale parcourue: {{ total_distance|add:0|floatformat:0 }} km - Temps écoulé: {{ elapsed_time }} - Vitesse moyenne: {{ average_speed|floatformat:2 }} km/h</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Début activité</th>
+                <th>Distance parcourue (km)</th>
+                <th>Temps écoulé</th>
+                <th>Vitesse moyenne (km/h)</th>
+                <th>Vitesse maximale (km/h)</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <!-- Add other fields as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for start_time, distance3d, elapsed_time, average_speed_kmh, max_speed_kmh, activity_label, activity_type in activities %}
+            <tr>
+                <td>{{ start_time }}</td>
+                <td>{{ distance3d|floatformat:2 }}</td>
+                {% load time_filters %}
+                <td>{{ elapsed_time|format_duration }}</td>
+                <td>{{ average_speed_kmh|floatformat:2 }}</td>
+                <td>{{ max_speed_kmh|floatformat:2 }}</td>
+                <td>{{ activity_label }}</td>
+                <td>{{ activity_type }}</td>
+                <!-- Add other fields as needed -->
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No activity found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'strava:accueil' %}">Retour accueil</a>
+
+{% endblock %}
+

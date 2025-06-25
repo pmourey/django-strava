@@ -1,0 +1,10 @@
+{% extends "strava/base.html" %}
+
+{% block content %}
+    <h2>Bonjour, {{ request.user.username }} !</h2>
+    <p>Choisissez une action :</p>
+    <ul>
+        <li><a href="{% url 'strava:activity_list' %}">📋 Voir la liste des activités</a></li>
+    </ul>
+{% endblock %}
+

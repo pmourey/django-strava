@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion sportive</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <h1>Gestion sportive</h1>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Se déconnecter</button>
+    </form>
+    <br>
+
+    {% block content %}{% endblock %}
+    <!-- Footer -->
+    <footer>
+        <p>
+            &copy; 2025 Philippe Mourey. Tous droits réservés.
+            <a href="https://github.com/pmourey/cabinet">Code source</a>
+        </p>
+    </footer>
+</body>
+</html>
