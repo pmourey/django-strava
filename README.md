@@ -45,6 +45,6 @@ python manage.py runserver
 
 ### Requirements
 - Python 3.12+ 
-- virtualenvwrapper 
+- virtualenvwrapper (https://help.pythonanywhere.com/pages/VirtualEnvForWebsites)
 - See requirements.txt for full dependencies
 
