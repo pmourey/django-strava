@@ -4,7 +4,7 @@ from . import views
 app_name = 'strava'
 
 urlpatterns = [
-	# path('', views.accueil, name='accueil'), # enable this to restore default behavior (using GPX parsing)
+	path('accueil', views.accueil, name='accueil'), # enable this to restore default behavior (using GPX parsing)
 	path('activities/', views.activity_list, name='activity_list'),
 	# path('', views.base_map, name='Base Map View'),
 	path('', views.index, name='index'), # replaced by connected/ url
