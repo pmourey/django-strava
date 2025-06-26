@@ -1,0 +1,59 @@
+{% extends 'strava/base.html' %}
+
+{% block content %}
+        <a href="{% url 'strava:index' %}">Retour accueil</a>
+
+<div class="container mt-4">
+    <h2>Mes activités Strava</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Distance (km)</th>
+                <th>Durée</th>
+                <th>Dénivelé (m)</th>
+                <th>Vitesse moyenne</th>
+                <th>Lien Strava</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% load custom_filters %}
+            {% for activity in activities %}
+            <tr>
+                <td>{{ activity.start_date_local|format_strava_date }}</td>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.type }}</td>
+                <td>{{ activity.distance|to_km|floatformat:2 }} km</td>
+                <td>{{ activity.moving_time }}</td>
+                <td>{{ activity.total_elevation_gain|floatformat:0 }}</td>
+                <td>{{ activity.average_speed|to_kmh|floatformat:1 }} km/h</td>
+                <td>
+                    <a href="https://www.strava.com/activities/{{ activity.id }}" 
+                       target="_blank" 
+                       class="btn btn-sm btn-strava">
+                        Voir sur Strava
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">Aucune activité trouvée</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+.btn-strava {
+    background-color: #FC4C02;
+    color: white;
+}
+.btn-strava:hover {
+    background-color: #D84100;
+    color: white;
+}
+</style>
+{% endblock %}
