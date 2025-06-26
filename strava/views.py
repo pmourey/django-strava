@@ -15,19 +15,19 @@ import polyline
 # Create your views here.
 
 @login_required
-@group_required(['strava', 'admin'])
+# @group_required(['strava', 'admin'])
 def accueil(request):
 	return render(request, 'strava/accueil.html')
 
 
 @login_required
-@group_required(['strava', 'admin'])
+# @group_required(['strava', 'admin'])
 def index(request):
 	return render(request, 'strava/index.html')
 
 
 @login_required
-@group_required(['strava', 'admin'])
+# @group_required(['strava', 'admin'])
 def activity_list(request):
 	activity_filter = 'running'  # ['running', 'cycling', 'walking']
 	activities = get_activities()
@@ -39,7 +39,7 @@ def activity_list(request):
 
 
 @login_required
-@group_required(['strava', 'admin'])
+# @group_required(['strava', 'admin'])
 def base_map(request):
 	# Make your map object
 	nantes = [47.218371, -1.553621]  # Nantes coordinates
@@ -52,7 +52,7 @@ def base_map(request):
 
 
 @login_required
-@group_required(['strava', 'admin'])
+# @group_required(['strava', 'admin'])
 def connected_map(request):
 	# Make your map object
 	nantes = [47.218371, -1.553621]  # Nantes coordinates
