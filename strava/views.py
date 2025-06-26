@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
 from .common import get_activities
 from datetime import timedelta
 
@@ -11,6 +12,7 @@ import pandas as pd
 import requests
 import polyline
 
+import time
 
 # Create your views here.
 
@@ -88,3 +90,40 @@ def connected_map(request):
 	main_map_html = main_map._repr_html_()  # Get HTML for website
 	context = {"main_map": main_map_html}
 	return render(request, 'strava/index.html', context)
+
+@login_required
+def list_strava_activities(request):
+	if not request.user.is_authenticated:
+		return redirect('login')
+
+	try:
+		# Utiliser social-auth comme dans connected_map
+		strava_login = request.user.social_auth.get(provider='strava')
+		access_token = strava_login.extra_data['access_token']
+
+		# Appel direct à l'API Strava
+		activities_url = "https://www.strava.com/api/v3/athlete/activities"
+		headers = {'Authorization': f'Bearer {access_token}'}
+		params = {'per_page': 50,  # Limite à 50 activités
+			'page': 1,  # Première page
+			'before': int(time.time()),  # Timestamp actuel
+			'after': None  # Pas de limite dans le passé
+		}
+
+		response = requests.get(activities_url, headers=headers, params=params)
+		activities = response.json()
+
+		context = {'activities': activities}
+
+		print(f"Nombre d'activités récupérées: {len(activities)}")
+		# for activity in activities:
+		# 	print(f"Activité: {activity['name']}, Distance: {activity['distance']}, Durée: {activity['elapsed_time']}")
+
+		return render(request, 'strava/strava_activities_list.html', context)
+
+	except Exception as e:
+		messages.error(request, f"Erreur lors de la récupération des activités: {str(e)}")
+		import logging
+		logger = logging.getLogger(__name__)
+		logger.error(f"Erreur détaillée: {e}", exc_info=True)
+		return redirect('strava:index')  # ou une autre page appropriée

@@ -11,4 +11,6 @@ urlpatterns = [
 	path('connected/', views.connected_map, name='Connect Map View'),
 	path("oauth/", include("social_django.urls", namespace="social")),
 	# path('social-auth/', include('social_django.urls', namespace='social')),
+	path('strava-activities/', views.list_strava_activities, name='strava_activities_list'),
+
 ]
