@@ -26,7 +26,7 @@
                 <td>{{ activity.name }}</td>
                 <td>{{ activity.type }}</td>
                 <td>{{ activity.distance|to_km|floatformat:2 }} km</td>
-                <td>{{ activity.moving_time }}</td>
+                <td>{{ activity.moving_time|format_duration_text }}</td>
                 <td>{{ activity.total_elevation_gain|floatformat:0 }}</td>
                 <td>{{ activity.average_speed|to_kmh|floatformat:1 }} km/h</td>
                 <td>
