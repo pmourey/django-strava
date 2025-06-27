@@ -62,7 +62,7 @@ def format_duration(seconds):
     return f"{hours}h{minutes:02d}m{seconds:02d}s"
 
 @register.filter
-def format_duration_old(seconds):
+def format_duration_gpx(seconds):
 	hours = int(seconds // 3600)
 	minutes = int((seconds % 3600) // 60)
 	seconds = int(seconds % 60)

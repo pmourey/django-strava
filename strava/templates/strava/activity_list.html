@@ -22,7 +22,7 @@
                 <td>{{ start_time }}</td>
                 <td>{{ distance3d|floatformat:2 }}</td>
                 {% load custom_filters %}
-                <td>{{ elapsed_time|format_duration }}</td>
+                <td>{{ elapsed_time|format_duration_gpx }}</td>
                 <td>{{ average_speed_kmh|floatformat:2 }}</td>
                 <td>{{ max_speed_kmh|floatformat:2 }}</td>
                 <td>{{ activity_label }}</td>
